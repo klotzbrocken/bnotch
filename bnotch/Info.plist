@@ -12,7 +12,7 @@
 	<key>SUFeedURL</key>
 	<string>https://raw.githubusercontent.com/klotzbrocken/bnotch/main/appcast.xml</string>
 	<key>SUPublicEDKey</key>
-	<string>PLACEHOLDER_WILL_BE_REPLACED</string>
+	<string>BOcdIyAHhHsHTHq3S2mTcYqVqwFfMn18OLdX3xA4zkQ=</string>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 </dict>
