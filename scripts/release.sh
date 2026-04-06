@@ -51,7 +51,7 @@ xcodebuild -exportArchive \
 
 echo "==> Notarizing..."
 xcrun notarytool submit "${EXPORT_DIR}/${APP_NAME}" \
-    --keychain-profile "notary" \
+    --keychain-profile "simplebanking-notary" \
     --wait
 
 xcrun stapler staple "${EXPORT_DIR}/${APP_NAME}"
