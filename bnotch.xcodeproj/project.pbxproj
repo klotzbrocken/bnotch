@@ -1,0 +1,401 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA000001 /* bnotchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000010 /* bnotchApp.swift */; };
+		AA000002 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA000020 /* Assets.xcassets */; };
+		AA000003 /* BookmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000030 /* BookmarkModel.swift */; };
+		AA000004 /* BookmarkStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000040 /* BookmarkStore.swift */; };
+		AA000005 /* BrowserDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000050 /* BrowserDetector.swift */; };
+		AA000006 /* FaviconFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000060 /* FaviconFetcher.swift */; };
+		AA000007 /* NotchWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000070 /* NotchWindow.swift */; };
+		AA000008 /* NotchShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000080 /* NotchShape.swift */; };
+		AA000009 /* NotchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000090 /* NotchContentView.swift */; };
+		AA00000A /* BookmarkListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000A0 /* BookmarkListView.swift */; };
+		AA00000B /* BookmarkRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000B0 /* BookmarkRowView.swift */; };
+		AA00000C /* AddBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000C0 /* AddBookmarkView.swift */; };
+		AA00000D /* EditBookmarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000D0 /* EditBookmarkView.swift */; };
+		AA00000E /* GroupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000E0 /* GroupListView.swift */; };
+		AA00000F /* NotchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000F0 /* NotchViewModel.swift */; };
+		AA000011 /* StatusBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000100 /* StatusBarController.swift */; };
+		AA000012 /* NotchDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000130 /* NotchDetector.swift */; };
+		AA000013 /* CGSSpace.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000140 /* CGSSpace.swift */; };
+		AA000014 /* NotchSpaceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000150 /* NotchSpaceManager.swift */; };
+		AA000015 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000160 /* Localization.swift */; };
+		AA000016 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000170 /* AppSettings.swift */; };
+		AA000017 /* BookmarkIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000180 /* BookmarkIconView.swift */; };
+		AA000018 /* UpdaterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000190 /* UpdaterManager.swift */; };
+		SP000003 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = SP000002 /* Sparkle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA0000FF /* bnotch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bnotch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA000010 /* bnotchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bnotchApp.swift; sourceTree = "<group>"; };
+		AA000020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA000030 /* BookmarkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkModel.swift; sourceTree = "<group>"; };
+		AA000040 /* BookmarkStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkStore.swift; sourceTree = "<group>"; };
+		AA000050 /* BrowserDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserDetector.swift; sourceTree = "<group>"; };
+		AA000060 /* FaviconFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaviconFetcher.swift; sourceTree = "<group>"; };
+		AA000070 /* NotchWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchWindow.swift; sourceTree = "<group>"; };
+		AA000080 /* NotchShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchShape.swift; sourceTree = "<group>"; };
+		AA000090 /* NotchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchContentView.swift; sourceTree = "<group>"; };
+		AA0000A0 /* BookmarkListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkListView.swift; sourceTree = "<group>"; };
+		AA0000B0 /* BookmarkRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRowView.swift; sourceTree = "<group>"; };
+		AA0000C0 /* AddBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookmarkView.swift; sourceTree = "<group>"; };
+		AA0000D0 /* EditBookmarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditBookmarkView.swift; sourceTree = "<group>"; };
+		AA0000E0 /* GroupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupListView.swift; sourceTree = "<group>"; };
+		AA0000F0 /* NotchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchViewModel.swift; sourceTree = "<group>"; };
+		AA000100 /* StatusBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusBarController.swift; sourceTree = "<group>"; };
+		AA000110 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA000120 /* bnotch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bnotch.entitlements; sourceTree = "<group>"; };
+		AA000130 /* NotchDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchDetector.swift; sourceTree = "<group>"; };
+		AA000140 /* CGSSpace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSSpace.swift; sourceTree = "<group>"; };
+		AA000150 /* NotchSpaceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotchSpaceManager.swift; sourceTree = "<group>"; };
+		AA000160 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		AA000170 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		AA000180 /* BookmarkIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkIconView.swift; sourceTree = "<group>"; };
+		AA000190 /* UpdaterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdaterManager.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA200001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				SP000003 /* Sparkle in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA300001 /* root */ = {
+			isa = PBXGroup;
+			children = (
+				AA300002 /* bnotch */,
+				AA300010 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA300002 /* bnotch */ = {
+			isa = PBXGroup;
+			children = (
+				AA000010 /* bnotchApp.swift */,
+				AA000110 /* Info.plist */,
+				AA000120 /* bnotch.entitlements */,
+				AA000020 /* Assets.xcassets */,
+				AA300003 /* Models */,
+				AA300004 /* Managers */,
+				AA300005 /* Views */,
+				AA300006 /* Notch */,
+			);
+			path = bnotch;
+			sourceTree = "<group>";
+		};
+		AA300003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AA000030 /* BookmarkModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AA300004 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				AA000040 /* BookmarkStore.swift */,
+				AA000050 /* BrowserDetector.swift */,
+				AA000060 /* FaviconFetcher.swift */,
+				AA000100 /* StatusBarController.swift */,
+				AA000130 /* NotchDetector.swift */,
+				AA000140 /* CGSSpace.swift */,
+				AA000150 /* NotchSpaceManager.swift */,
+				AA000160 /* Localization.swift */,
+				AA000170 /* AppSettings.swift */,
+				AA000190 /* UpdaterManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		AA300005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000A0 /* BookmarkListView.swift */,
+				AA0000B0 /* BookmarkRowView.swift */,
+				AA0000C0 /* AddBookmarkView.swift */,
+				AA0000D0 /* EditBookmarkView.swift */,
+				AA0000E0 /* GroupListView.swift */,
+				AA000180 /* BookmarkIconView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		AA300006 /* Notch */ = {
+			isa = PBXGroup;
+			children = (
+				AA000070 /* NotchWindow.swift */,
+				AA000080 /* NotchShape.swift */,
+				AA000090 /* NotchContentView.swift */,
+				AA0000F0 /* NotchViewModel.swift */,
+			);
+			path = Notch;
+			sourceTree = "<group>";
+		};
+		AA300010 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000FF /* bnotch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA400001 /* bnotch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA600001 /* Build configuration list for PBXNativeTarget "bnotch" */;
+			buildPhases = (
+				AA500001 /* Sources */,
+				AA200001 /* Frameworks */,
+				AA500002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bnotch;
+			packageProductDependencies = (
+				SP000002 /* Sparkle */,
+			);
+			productName = bnotch;
+			productReference = AA0000FF /* bnotch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA700001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					AA400001 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+				};
+			};
+			buildConfigurationList = AA600002 /* Build configuration list for PBXProject "bnotch" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA300001 /* root */;
+			productRefGroup = AA300010 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			packageReferences = (
+				SP000001 /* XCRemoteSwiftPackageReference "Sparkle" */,
+			);
+			targets = (
+				AA400001 /* bnotch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA500002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000002 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA500001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA000001 /* bnotchApp.swift in Sources */,
+				AA000003 /* BookmarkModel.swift in Sources */,
+				AA000004 /* BookmarkStore.swift in Sources */,
+				AA000005 /* BrowserDetector.swift in Sources */,
+				AA000006 /* FaviconFetcher.swift in Sources */,
+				AA000007 /* NotchWindow.swift in Sources */,
+				AA000008 /* NotchShape.swift in Sources */,
+				AA000009 /* NotchContentView.swift in Sources */,
+				AA00000A /* BookmarkListView.swift in Sources */,
+				AA00000B /* BookmarkRowView.swift in Sources */,
+				AA00000C /* AddBookmarkView.swift in Sources */,
+				AA00000D /* EditBookmarkView.swift in Sources */,
+				AA00000E /* GroupListView.swift in Sources */,
+				AA00000F /* NotchViewModel.swift in Sources */,
+				AA000011 /* StatusBarController.swift in Sources */,
+				AA000012 /* NotchDetector.swift in Sources */,
+				AA000013 /* CGSSpace.swift in Sources */,
+				AA000014 /* NotchSpaceManager.swift in Sources */,
+				AA000015 /* Localization.swift in Sources */,
+				AA000016 /* AppSettings.swift in Sources */,
+				AA000017 /* BookmarkIconView.swift in Sources */,
+				AA000018 /* UpdaterManager.swift in Sources */,
+);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA800001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA800002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		AA800003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = bnotch/bnotch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bnotch/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 bnotch. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bnotch.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA800004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = bnotch/bnotch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = bnotch/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 bnotch. All rights reserved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bnotch.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA600001 /* Build configuration list for PBXNativeTarget "bnotch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA800003 /* Debug */,
+				AA800004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA600002 /* Build configuration list for PBXProject "bnotch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA800001 /* Debug */,
+				AA800002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		SP000001 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = "2.6.0";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		SP000002 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = SP000001 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+	};
+	rootObject = AA700001 /* Project object */;
+}
