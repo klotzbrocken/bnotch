@@ -61,6 +61,14 @@ xcrun notarytool submit "build/${ZIP_NAME}" \
 
 xcrun stapler staple "${EXPORT_DIR}/${APP_NAME}"
 
+echo "==> Removing quarantine flags..."
+xattr -dr com.apple.quarantine "${EXPORT_DIR}/${APP_NAME}" 2>/dev/null || true
+
+echo "==> Re-creating ZIP with stapled app..."
+cd "$EXPORT_DIR"
+ditto -c -k --keepParent "$APP_NAME" "../${ZIP_NAME}"
+cd -
+
 echo "==> Generating appcast..."
 SPARKLE_BIN=$(find ~/Library/Developer/Xcode/DerivedData -path "*/SourcePackages/artifacts/sparkle/Sparkle/bin" -type d 2>/dev/null | head -1)
 
