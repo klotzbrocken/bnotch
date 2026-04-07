@@ -48,14 +48,14 @@ struct BookmarkIconView: View {
                         VStack(spacing: 8) {
                             Image(systemName: selectedPile != nil ? "folder" : "bookmark")
                                 .font(.system(size: 28))
-                                .foregroundColor(.white.opacity(0.3))
+                                .foregroundColor(.white.opacity(0.4))
                             Text(L10n.noBookmarks)
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                             if selectedPile == nil {
                                 Text(L10n.clickToAdd)
                                     .font(.system(size: 11))
-                                    .foregroundColor(.white.opacity(0.3))
+                                    .foregroundColor(.white.opacity(0.4))
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -122,7 +122,7 @@ struct BookmarkIconItem: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 14)
-                .fill(isHovered ? Color.blue.opacity(0.3) : Color.white.opacity(0.08))
+                .fill(isHovered ? Color.blue.opacity(0.3) : Color.white.opacity(0.1))
                 .frame(width: 56, height: 56)
 
             if let data = bookmark.faviconData,
@@ -136,11 +136,13 @@ struct BookmarkIconItem: View {
             } else {
                 Image(systemName: "globe")
                     .font(.system(size: 26))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
             }
         }
+        .scaleEffect(isHovered ? 1.05 : 1.0)
         .help(label)
         .onHover { isHovered = $0 }
+        .animation(.easeOut(duration: 0.15), value: isHovered)
         .onTapGesture { onOpen() }
         .contextMenu {
             Button(L10n.open) { onOpen() }

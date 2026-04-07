@@ -25,7 +25,7 @@ struct AddBookmarkView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n.url)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
                 TextField("https://...", text: $urlString)
                     .textFieldStyle(.plain)
                     .padding(8)
@@ -39,7 +39,7 @@ struct AddBookmarkView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n.nameOptional)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
                 TextField(L10n.autoDetected, text: $name)
                     .textFieldStyle(.plain)
                     .padding(8)
@@ -53,7 +53,7 @@ struct AddBookmarkView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.group)
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.white.opacity(0.4))
                     HStack {
                         Picker("", selection: Binding(
                             get: { viewModel.selectedGroupID },
@@ -76,7 +76,7 @@ struct AddBookmarkView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n.browserOptional)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
                 HStack {
                     Picker("", selection: $selectedBrowserID) {
                         Text(L10n.defaultBrowser).tag(String?.none)
@@ -102,7 +102,7 @@ struct AddBookmarkView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n.openModeLabel)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
                 HStack {
                     Picker("", selection: $selectedOpenMode) {
                         Text(L10n.openInTab).tag(OpenMode.tab)
@@ -188,7 +188,7 @@ struct AddBookmarkView: View {
         }
 
         viewModel.selectedGroupID = nil
-        withAnimation { viewModel.showAddBookmark = false }
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) { viewModel.showAddBookmark = false }
     }
 
     private func normalizeURL(_ input: String) -> String {

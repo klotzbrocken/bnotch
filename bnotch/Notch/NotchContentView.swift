@@ -7,6 +7,7 @@ struct NotchContentView: View {
     @State private var hoverTask: Task<Void, Never>?
     @State private var openedAt: Date = .distantPast
     @State private var isResizing = false
+    @State private var isResizeHovered = false
 
     private var currentShape: NotchShape {
         NotchShape(
@@ -58,14 +59,14 @@ struct NotchContentView: View {
                     Button(action: { viewModel.showAddBookmark = true }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 18))
-                            .foregroundColor(.white.opacity(0.8))
+                            .foregroundColor(.white.opacity(0.7))
                     }
                     .buttonStyle(.plain)
 
                     Button(action: { viewModel.showAddGroup = true }) {
                         Image(systemName: "folder.badge.plus")
                             .font(.system(size: 16))
-                            .foregroundColor(.white.opacity(0.8))
+                            .foregroundColor(.white.opacity(0.7))
                     }
                     .buttonStyle(.plain)
                 }
@@ -75,7 +76,7 @@ struct NotchContentView: View {
             .padding(.bottom, 8)
 
             Divider()
-                .background(Color.white.opacity(0.15))
+                .background(Color.white.opacity(0.1))
 
             // Content — fills remaining space between header and bottom bar
             Group {
@@ -131,7 +132,7 @@ struct NotchContentView: View {
             }) {
                 Image(systemName: "cup.and.saucer.fill")
                     .font(.system(size: 11))
-                    .foregroundColor(.white.opacity(0.6))
+                    .foregroundColor(.white.opacity(0.7))
             }
             .buttonStyle(.plain)
             .help("Support on Ko-fi")
@@ -141,7 +142,7 @@ struct NotchContentView: View {
             // Right side: context-dependent
             if viewModel.showSettings {
                 Button(L10n.ok) {
-                    withAnimation { viewModel.showSettings = false }
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) { viewModel.showSettings = false }
                 }
                 .buttonStyle(.plain)
                 .font(.system(size: 12))
@@ -149,14 +150,14 @@ struct NotchContentView: View {
             } else if viewModel.showAddBookmark || viewModel.showAddGroup {
                 Button(L10n.cancel) {
                     viewModel.selectedGroupID = nil
-                    withAnimation {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                         viewModel.showAddBookmark = false
                         viewModel.showAddGroup = false
                     }
                 }
                 .buttonStyle(.plain)
                 .font(.system(size: 12))
-                .foregroundColor(.white.opacity(0.6))
+                .foregroundColor(.white.opacity(0.7))
 
                 Button(L10n.add) {
                     viewModel.saveRequested = true
@@ -167,11 +168,11 @@ struct NotchContentView: View {
                 .disabled(!viewModel.canSave)
             } else if viewModel.editingBookmark != nil {
                 Button(L10n.cancel) {
-                    withAnimation { viewModel.editingBookmark = nil }
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) { viewModel.editingBookmark = nil }
                 }
                 .buttonStyle(.plain)
                 .font(.system(size: 12))
-                .foregroundColor(.white.opacity(0.6))
+                .foregroundColor(.white.opacity(0.7))
 
                 Button(L10n.save) {
                     viewModel.saveRequested = true
@@ -181,10 +182,10 @@ struct NotchContentView: View {
                 .foregroundColor(.blue)
             } else {
                 // Main view: settings gear
-                Button(action: { withAnimation { viewModel.showSettings = true } }) {
+                Button(action: { withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) { viewModel.showSettings = true } }) {
                     Image(systemName: "gearshape")
                         .font(.system(size: 11))
-                        .foregroundColor(.white.opacity(0.6))
+                        .foregroundColor(.white.opacity(0.7))
                 }
                 .buttonStyle(.plain)
             }
@@ -197,9 +198,11 @@ struct NotchContentView: View {
 
     private var resizeHandle: some View {
         VStack(spacing: 0) {
-            RoundedRectangle(cornerRadius: 1.5)
-                .fill(Color.white.opacity(0.25))
-                .frame(width: 36, height: 3)
+            RoundedRectangle(cornerRadius: 2)
+                .fill(Color.white.opacity(isResizeHovered || isResizing ? 0.7 : 0.4))
+                .frame(width: 36, height: 4)
+                .animation(.easeOut(duration: 0.15), value: isResizeHovered)
+                .animation(.easeOut(duration: 0.15), value: isResizing)
         }
         .frame(maxWidth: .infinity)
         .frame(height: 18)
@@ -230,6 +233,7 @@ struct NotchContentView: View {
                 }
         )
         .onHover { hovering in
+            isResizeHovered = hovering
             if hovering {
                 NSCursor.resizeUpDown.push()
             } else {
@@ -296,7 +300,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n.language)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
                 HStack {
                     Picker("", selection: $settings.language) {
                         ForEach(AppLanguage.allCases, id: \.self) { lang in
@@ -315,7 +319,7 @@ struct SettingsView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(L10n.viewMode)
                     .font(.system(size: 10, weight: .medium))
-                    .foregroundColor(.white.opacity(0.5))
+                    .foregroundColor(.white.opacity(0.4))
                 HStack {
                     Picker("", selection: $settings.viewMode) {
                         Text(L10n.listView).tag(ViewMode.list)
@@ -330,13 +334,37 @@ struct SettingsView: View {
             .padding(.horizontal, 24)
 
             // About
-            VStack(spacing: 4) {
+            VStack(spacing: 6) {
                 Text("bnotch")
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.white)
-                Text("v1.0")
+                Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?")")
                     .font(.system(size: 10))
                     .foregroundColor(.white.opacity(0.4))
+
+                HStack(spacing: 12) {
+                    Button(action: {
+                        NSWorkspace.shared.open(URL(string: "https://github.com/klotzbrocken/bnotch")!)
+                    }) {
+                        HStack(spacing: 3) {
+                            Image(systemName: "chevron.left.forwardslash.chevron.right")
+                                .font(.system(size: 9))
+                            Text("GitHub")
+                                .font(.system(size: 10))
+                        }
+                        .foregroundColor(.white.opacity(0.4))
+                    }
+                    .buttonStyle(.plain)
+
+                    Button(action: {
+                        NSWorkspace.shared.open(URL(string: "https://klotzbrocken.de")!)
+                    }) {
+                        Text("Maik Klotz")
+                            .font(.system(size: 10))
+                            .foregroundColor(.white.opacity(0.4))
+                    }
+                    .buttonStyle(.plain)
+                }
             }
         }
     }

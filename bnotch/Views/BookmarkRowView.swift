@@ -21,8 +21,8 @@ struct BookmarkRowView: View {
                     .cornerRadius(4)
             } else {
                 Image(systemName: "globe")
-                    .font(.system(size: 14))
-                    .foregroundColor(.white.opacity(0.5))
+                    .font(.system(size: 16))
+                    .foregroundColor(.white.opacity(0.4))
                     .frame(width: 18, height: 18)
             }
 
@@ -53,6 +53,7 @@ struct BookmarkRowView: View {
                 .fill(isHovered ? Color.blue.opacity(0.25) : Color.clear)
         )
         .onHover { isHovered = $0 }
+        .animation(.easeOut(duration: 0.15), value: isHovered)
         .onTapGesture { onOpen(); onClose?() }
         .contextMenu {
             Button(L10n.open) { onOpen() }

@@ -38,14 +38,14 @@ struct BookmarkListView: View {
                         VStack(spacing: 8) {
                             Image(systemName: selectedPile != nil ? "folder" : "bookmark")
                                 .font(.system(size: 28))
-                                .foregroundColor(.white.opacity(0.3))
+                                .foregroundColor(.white.opacity(0.4))
                             Text(L10n.noBookmarks)
                                 .font(.system(size: 12))
                                 .foregroundColor(.white.opacity(0.4))
                             if selectedPile == nil {
                                 Text(L10n.clickToAdd)
                                     .font(.system(size: 11))
-                                    .foregroundColor(.white.opacity(0.3))
+                                    .foregroundColor(.white.opacity(0.4))
                             }
                         }
                         .frame(maxWidth: .infinity)
@@ -122,11 +122,12 @@ struct PileTab: View {
             .padding(.vertical, 5)
             .background(
                 RoundedRectangle(cornerRadius: 8)
-                    .fill(isSelected ? Color.blue.opacity(0.4) : (isHovered ? Color.white.opacity(0.08) : Color.white.opacity(0.05)))
+                    .fill(isSelected ? Color.blue.opacity(0.4) : (isHovered ? Color.white.opacity(0.15) : Color.white.opacity(0.1)))
             )
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
+        .animation(.easeOut(duration: 0.15), value: isHovered)
     }
 }
 

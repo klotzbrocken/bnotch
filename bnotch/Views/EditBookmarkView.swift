@@ -35,7 +35,7 @@ struct EditBookmarkView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.url)
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.white.opacity(0.4))
                     TextField("https://...", text: $urlString)
                         .textFieldStyle(.plain)
                         .padding(8)
@@ -48,7 +48,7 @@ struct EditBookmarkView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.bookmarkName)
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.white.opacity(0.4))
                     TextField(L10n.bookmarkName, text: $name)
                         .textFieldStyle(.plain)
                         .padding(8)
@@ -62,7 +62,7 @@ struct EditBookmarkView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text(L10n.group)
                             .font(.system(size: 10, weight: .medium))
-                            .foregroundColor(.white.opacity(0.5))
+                            .foregroundColor(.white.opacity(0.4))
                         HStack {
                             Picker("", selection: $selectedGroupID) {
                                 Text(L10n.noGroup).tag(UUID?.none)
@@ -82,7 +82,7 @@ struct EditBookmarkView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.browser)
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.white.opacity(0.4))
                     HStack {
                         Picker("", selection: $selectedBrowserID) {
                             Text(L10n.defaultBrowser).tag(String?.none)
@@ -108,7 +108,7 @@ struct EditBookmarkView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(L10n.openModeLabel)
                         .font(.system(size: 10, weight: .medium))
-                        .foregroundColor(.white.opacity(0.5))
+                        .foregroundColor(.white.opacity(0.4))
                     HStack {
                         Picker("", selection: $selectedOpenMode) {
                             Text(L10n.openInTab).tag(OpenMode.tab)
@@ -151,6 +151,6 @@ struct EditBookmarkView: View {
             }
         }
 
-        withAnimation { viewModel.editingBookmark = nil }
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) { viewModel.editingBookmark = nil }
     }
 }

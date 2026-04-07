@@ -4,6 +4,14 @@
         <title>bnotch Updates</title>
         <language>en</language>
         <item>
+            <title>1.05</title>
+            <pubDate>Tue, 07 Apr 2026 07:11:08 +0200</pubDate>
+            <sparkle:version>3</sparkle:version>
+            <sparkle:shortVersionString>1.05</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/klotzbrocken/bnotch/releases/download/v1.05/bnotch-1.05.zip" length="3913003" type="application/octet-stream" sparkle:edSignature="Ibyo431bvx0kGtT18iKpWPoqALwk4Qy/QnW983r1ecPLcczLwBcTuCj1zN8m0hUv3OvzPaTnszoi3J5OQyxbCQ=="/>
+        </item>
+        <item>
             <title>1.1</title>
             <pubDate>Tue, 07 Apr 2026 02:58:44 +0200</pubDate>
             <sparkle:version>2</sparkle:version>

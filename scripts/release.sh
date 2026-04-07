@@ -49,17 +49,17 @@ xcodebuild -exportArchive \
     -exportOptionsPlist build/ExportOptions.plist \
     -exportPath "$EXPORT_DIR"
 
+echo "==> Creating ZIP for notarization & Sparkle..."
+cd "$EXPORT_DIR"
+ditto -c -k --keepParent "$APP_NAME" "../${ZIP_NAME}"
+cd -
+
 echo "==> Notarizing..."
-xcrun notarytool submit "${EXPORT_DIR}/${APP_NAME}" \
+xcrun notarytool submit "build/${ZIP_NAME}" \
     --keychain-profile "simplebanking-notary" \
     --wait
 
 xcrun stapler staple "${EXPORT_DIR}/${APP_NAME}"
-
-echo "==> Creating ZIP for Sparkle..."
-cd "$EXPORT_DIR"
-ditto -c -k --keepParent "$APP_NAME" "../${ZIP_NAME}"
-cd -
 
 echo "==> Generating appcast..."
 SPARKLE_BIN=$(find ~/Library/Developer/Xcode/DerivedData -path "*/SourcePackages/artifacts/sparkle/Sparkle/bin" -type d 2>/dev/null | head -1)
