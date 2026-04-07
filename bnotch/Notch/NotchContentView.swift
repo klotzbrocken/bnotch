@@ -6,6 +6,7 @@ struct NotchContentView: View {
     @StateObject private var settings = AppSettings.shared
     @State private var hoverTask: Task<Void, Never>?
     @State private var openedAt: Date = .distantPast
+    @State private var isResizing = false
 
     private var currentShape: NotchShape {
         NotchShape(
@@ -22,15 +23,20 @@ struct NotchContentView: View {
             if viewModel.isOpen {
                 expandedContent
                     .padding(.horizontal, 12)
-                    .padding(.bottom, 12)
+                    .padding(.bottom, 4)
                     .transition(.opacity.animation(.easeOut(duration: 0.2)))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        // Clip hover area to the notch shape so invisible padding doesn't trigger hover
+        .clipShape(currentShape)
+        .contentShape(currentShape)
         .onHover { handleHover($0) }
-        .onTapGesture {
-            if !viewModel.isOpen { viewModel.open() }
-        }
+        .simultaneousGesture(
+            TapGesture().onEnded {
+                if !viewModel.isOpen { viewModel.open() }
+            }
+        )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Expanded content
@@ -52,21 +58,19 @@ struct NotchContentView: View {
                     Button(action: { viewModel.showAddBookmark = true }) {
                         Image(systemName: "plus.circle.fill")
                             .font(.system(size: 18))
-                            .foregroundColor(store.canAddEntry ? .white.opacity(0.8) : .white.opacity(0.3))
+                            .foregroundColor(.white.opacity(0.8))
                     }
                     .buttonStyle(.plain)
-                    .disabled(!store.canAddEntry)
 
                     Button(action: { viewModel.showAddGroup = true }) {
                         Image(systemName: "folder.badge.plus")
                             .font(.system(size: 16))
-                            .foregroundColor(store.canAddEntry ? .white.opacity(0.8) : .white.opacity(0.3))
+                            .foregroundColor(.white.opacity(0.8))
                     }
                     .buttonStyle(.plain)
-                    .disabled(!store.canAddEntry)
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 24)
             .padding(.top, 12)
             .padding(.bottom, 8)
 
@@ -110,6 +114,9 @@ struct NotchContentView: View {
 
             // Bottom bar — always pinned at bottom
             bottomBar
+
+            // Resize handle
+            resizeHandle
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -182,8 +189,53 @@ struct NotchContentView: View {
                 .buttonStyle(.plain)
             }
         }
-        .padding(.horizontal, 20)
-        .padding(.bottom, 6)
+        .padding(.horizontal, 24)
+        .padding(.bottom, 4)
+    }
+
+    // MARK: - Resize Handle
+
+    private var resizeHandle: some View {
+        VStack(spacing: 0) {
+            RoundedRectangle(cornerRadius: 1.5)
+                .fill(Color.white.opacity(0.25))
+                .frame(width: 36, height: 3)
+        }
+        .frame(maxWidth: .infinity)
+        .frame(height: 18)
+        .contentShape(Rectangle())
+        .highPriorityGesture(
+            DragGesture(minimumDistance: 1)
+                .onChanged { value in
+                    if !isResizing { isResizing = true }
+                    let newHeight = max(
+                        viewModel.minOpenHeight,
+                        min(viewModel.maxOpenHeight, settings.notchHeight + value.translation.height)
+                    )
+                    if let window = NSApp.windows.first(where: { $0 is NotchWindow }) as? NotchWindow {
+                        window.updateSize(
+                            width: viewModel.openWidth,
+                            height: newHeight,
+                            animated: false
+                        )
+                    }
+                }
+                .onEnded { value in
+                    let newHeight = max(
+                        viewModel.minOpenHeight,
+                        min(viewModel.maxOpenHeight, settings.notchHeight + value.translation.height)
+                    )
+                    settings.notchHeight = newHeight
+                    isResizing = false
+                }
+        )
+        .onHover { hovering in
+            if hovering {
+                NSCursor.resizeUpDown.push()
+            } else {
+                NSCursor.pop()
+            }
+        }
     }
 
     // MARK: - Hover
@@ -202,10 +254,12 @@ struct NotchContentView: View {
                 }
             }
         } else {
+            // Never close while user is resizing
+            guard !isResizing else { return }
+
             let timeSinceOpen = Date().timeIntervalSince(openedAt)
             if timeSinceOpen < 0.5 { return }
 
-            // Longer delay when a form is open (user might move mouse briefly)
             let hasForm = viewModel.showAddBookmark || viewModel.editingBookmark != nil
                 || viewModel.showAddGroup || viewModel.showSettings
             let delay: UInt64 = hasForm ? 800 : 300
@@ -214,6 +268,8 @@ struct NotchContentView: View {
                 try? await Task.sleep(for: .milliseconds(delay))
                 guard !Task.isCancelled else { return }
                 await MainActor.run {
+                    // Re-check resize state after delay
+                    guard !isResizing else { return }
                     if viewModel.notchState == .open {
                         viewModel.close()
                     }
@@ -253,7 +309,7 @@ struct SettingsView: View {
                     Spacer()
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 24)
 
             // View mode
             VStack(alignment: .leading, spacing: 4) {
@@ -271,7 +327,7 @@ struct SettingsView: View {
                     Spacer()
                 }
             }
-            .padding(.horizontal, 20)
+            .padding(.horizontal, 24)
 
             // About
             VStack(spacing: 4) {
@@ -306,14 +362,14 @@ struct AddGroupView: View {
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(8)
                 .foregroundColor(.white)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 24)
         }
         .onChange(of: name) { viewModel.canSave = !$0.isEmpty }
         .onChange(of: viewModel.saveRequested) { requested in
             guard requested else { return }
             viewModel.saveRequested = false
             if !name.isEmpty {
-                _ = store.addGroup(name)
+                store.addGroup(name)
                 withAnimation { viewModel.showAddGroup = false }
             }
         }

@@ -14,6 +14,9 @@ class AppSettings: ObservableObject {
     @Published var viewMode: ViewMode {
         didSet { save() }
     }
+    @Published var notchHeight: CGFloat {
+        didSet { save() }
+    }
 
     private let fileURL: URL
 
@@ -26,6 +29,7 @@ class AppSettings: ObservableObject {
         // Defaults
         self.language = .system
         self.viewMode = .list
+        self.notchHeight = 288
 
         load()
     }
@@ -37,6 +41,7 @@ class AppSettings: ObservableObject {
             let decoded = try JSONDecoder().decode(SettingsData.self, from: data)
             self.language = decoded.language
             self.viewMode = decoded.viewMode
+            self.notchHeight = decoded.notchHeight ?? 288
         } catch {
             print("Failed to load settings: \(error)")
         }
@@ -44,7 +49,7 @@ class AppSettings: ObservableObject {
 
     private func save() {
         do {
-            let data = try JSONEncoder().encode(SettingsData(language: language, viewMode: viewMode))
+            let data = try JSONEncoder().encode(SettingsData(language: language, viewMode: viewMode, notchHeight: notchHeight))
             try data.write(to: fileURL, options: .atomic)
         } catch {
             print("Failed to save settings: \(error)")
@@ -55,4 +60,5 @@ class AppSettings: ObservableObject {
 private struct SettingsData: Codable {
     let language: AppLanguage
     let viewMode: ViewMode
+    let notchHeight: CGFloat?
 }

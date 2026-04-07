@@ -27,22 +27,16 @@ class NotchViewModel: ObservableObject {
         self.notchSize = CGSize(width: notch.width + 4, height: notch.height)
     }
 
-    /// Dynamic height based on content count
-    func openHeight(for store: BookmarkStore) -> CGFloat {
-        let headerHeight: CGFloat = 50   // header + divider
-        let rowHeight: CGFloat = 32      // per entry row
-        let padding: CGFloat = 30        // top/bottom padding
-        let entryCount = store.totalEntryCount
-        let minHeight: CGFloat = 140     // empty state
-        let maxHeight: CGFloat = 320
+    let defaultOpenHeight: CGFloat = 288
+    let minOpenHeight: CGFloat = 180
+    let maxOpenHeight: CGFloat = 600
 
-        if entryCount == 0 { return minHeight }
-        let contentHeight = headerHeight + CGFloat(entryCount) * rowHeight + padding
-        return min(max(contentHeight, minHeight), maxHeight)
+    var openHeight: CGFloat {
+        AppSettings.shared.notchHeight
     }
 
     var openNotchSize: CGSize {
-        CGSize(width: openWidth, height: 300) // fallback, overridden by dynamic calc
+        CGSize(width: openWidth, height: openHeight)
     }
 
     func open() {

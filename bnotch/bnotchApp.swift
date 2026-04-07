@@ -30,8 +30,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         viewModel.$notchState.sink { [weak self] state in
             guard let self, let window = self.notchWindow else { return }
             if state == .open {
-                let h: CGFloat = 360
-                window.updateSize(width: self.viewModel.openWidth, height: h + self.viewModel.shadowPadding)
+                let h = AppSettings.shared.notchHeight
+                window.updateSize(width: self.viewModel.openWidth, height: h)
                 window.allowKey = true
                 window.makeKey()
             } else {
@@ -65,8 +65,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @objc private func screenChanged() {
         guard let window = notchWindow else { return }
         if viewModel.isOpen {
-            let h = viewModel.openHeight(for: store)
-            window.updateSize(width: viewModel.openWidth, height: h + viewModel.shadowPadding, animated: false)
+            let h = AppSettings.shared.notchHeight
+            window.updateSize(width: viewModel.openWidth, height: h, animated: false)
         } else {
             let size = viewModel.closedNotchSize
             window.updateSize(width: size.width, height: size.height, animated: false)

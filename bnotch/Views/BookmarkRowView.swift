@@ -44,7 +44,7 @@ struct BookmarkRowView: View {
                     .frame(width: 14, height: 14)
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 24)
         .padding(.vertical, 6)
         .frame(maxWidth: .infinity)
         .contentShape(Rectangle())

@@ -7,8 +7,6 @@ class BookmarkStore: ObservableObject {
 
     private let fileURL: URL
 
-    static let maxTotalEntries = 8
-
     init() {
         let appSupport = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first!
         let appDir = appSupport.appendingPathComponent("bnotch", isDirectory: true)
@@ -20,10 +18,6 @@ class BookmarkStore: ObservableObject {
     /// Total number of top-level entries (ungrouped bookmarks + groups)
     var totalEntryCount: Int {
         ungroupedBookmarks.count + groups.count
-    }
-
-    var canAddEntry: Bool {
-        totalEntryCount < Self.maxTotalEntries
     }
 
     func load() {
@@ -49,22 +43,12 @@ class BookmarkStore: ObservableObject {
 
     // MARK: - Bookmark CRUD
 
-    func addBookmark(_ bookmark: Bookmark) -> Bool {
-        // Adding to a group doesn't count as a new top-level entry
-        if bookmark.groupID == nil {
-            guard canAddEntry else { return false }
-        } else {
-            // Still limit bookmarks per group to 10
-            let groupBookmarks = bookmarks.filter { $0.groupID == bookmark.groupID }
-            guard groupBookmarks.count < 10 else { return false }
-        }
-
+    func addBookmark(_ bookmark: Bookmark) {
         let groupBookmarks = bookmarks.filter { $0.groupID == bookmark.groupID }
         var bm = bookmark
         bm.sortOrder = (groupBookmarks.map(\.sortOrder).max() ?? -1) + 1
         bookmarks.append(bm)
         save()
-        return true
     }
 
     func updateBookmark(_ bookmark: Bookmark) {
@@ -85,12 +69,10 @@ class BookmarkStore: ObservableObject {
 
     // MARK: - Group CRUD
 
-    func addGroup(_ name: String) -> Bool {
-        guard canAddEntry else { return false }
+    func addGroup(_ name: String) {
         let order = (groups.map(\.sortOrder).max() ?? -1) + 1
         groups.append(BookmarkGroup(name: name, sortOrder: order))
         save()
-        return true
     }
 
     func updateGroup(_ group: BookmarkGroup) {

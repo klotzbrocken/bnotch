@@ -172,10 +172,7 @@ struct AddBookmarkView: View {
             openMode: selectedOpenMode
         )
 
-        guard store.addBookmark(bookmark) else {
-            errorMessage = L10n.limitReached
-            return
-        }
+        store.addBookmark(bookmark)
 
         Task {
             if let faviconData = await FaviconFetcher.shared.fetchFavicon(for: normalized) {
